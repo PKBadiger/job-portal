@@ -1,0 +1,49 @@
+@import 'Styles/base/color';
+
+.job-container {
+  display: flex;
+  .org-logo {
+    width: 10%;
+    img {
+      width: 56px;
+      height: 56px;
+    }
+  }
+  .job-pofile {
+    width: 80%;
+    border-right: 1px solid $color-grey-light;
+    margin-right: 10px;
+    padding-right: 20px;
+    color: $color-grey-dark;
+    span {
+      color: $color-grey;
+    }
+    .description {
+      margin-top: 10px;
+      font-size: 14px;
+      color: $color-grey-dark;
+    }
+    .job-profile-footer {
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid $color-grey-light;
+    }
+  }
+  .job-details {
+    width: 10%;
+    margin: auto;
+    text-align: center;
+    a {
+      text-decoration: none;
+      font-size: 14px;
+      color: $color-green;
+      font-weight: 600;
+      &:hover {
+        color: $color-green-dark;
+        text-decoration: underline;
+      }
+    }
+  }
+}

@@ -1,0 +1,90 @@
+@import 'Styles/base/color';
+@import 'Styles/base/mixins';
+
+.header-wrapper {
+  background-color: $color-grey-dark;
+  color: $color-white;
+  border-bottom: 3px solid $color-green-dark;
+  .header {
+    @include lg-screens() {
+      width: 80%;
+      margin: 0 auto;
+    }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    .logo {
+      position: relative;
+      flex-grow: 0.5;
+      p:nth-child(1) {
+        @include mobile {
+          font-size: 1.2rem;
+        }
+        @include tablet {
+          font-size: 1.4rem;
+        }
+        font-size: 1.8rem;
+        letter-spacing: 2px;
+      }
+      p:nth-child(2) {
+        @include mobile {
+          top: 20px;
+          right: 20px;
+          font-size: 11px;
+          font-weight: 600;
+        }
+        @include tablet {
+          top: 25px;
+        }
+        position: absolute;
+        top: 33px;
+        left: 50px;
+        font-size: 12px;
+        letter-spacing: 5px;
+      }
+    }
+    .search-bar,
+    .logout {
+      @include mobile {
+        display: none;
+      }
+    }
+    .search-bar {
+      flex-grow: 2;
+      position: relative;
+
+      input {
+        width: -webkit-fill-available;
+        width: -moz-available;
+        padding: 10px 35px 10px 20px;
+        border: none;
+        border-radius: 10px;
+        font-size: 0.9rem;
+        color: $color-grey-dark;
+        &:focus {
+          outline: none;
+        }
+      }
+      .search-icon {
+        position: absolute;
+        right: 10px;
+        top: 3px;
+        font-size: 1.2rem;
+        color: $color-green-dark;
+        cursor: pointer;
+      }
+    }
+    .logout {
+      flex-grow: 1;
+      text-align: right;
+      font-size: 1.6rem;
+    }
+    .hamburger-menu {
+      @include media(tablet, desktop, lg-screen) {
+        display: none;
+      }
+      font-size: 1.2rem;
+    }
+  }
+}

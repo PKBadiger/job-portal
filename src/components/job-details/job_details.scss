@@ -1,0 +1,53 @@
+@import 'Styles/base/color';
+
+.job-details {
+  position: relative;
+  margin-top: 20px;
+  color: $color-grey-dark;
+  max-height: 500px;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #aaaaaa;
+    border-radius: 100px;
+    background-clip: padding-box;
+    border: 4px solid rgba(0, 0, 0, 0);
+  }
+  &-header {
+    position: relative;
+    img {
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      right: 30px;
+      top: 0;
+    }
+  }
+  &-container {
+    margin-top: 10px;
+    ul {
+      list-style: none;
+      li {
+        display: inline-block;
+        font-size: 12.5px;
+        i {
+          margin-right: 5px;
+        }
+      }
+      li:not(:last-child) {
+        margin-right: 20px;
+      }
+    }
+    .job-details-descp {
+      margin-top: 10px;
+      p {
+        margin-top: 10px;
+        span {
+          font-size: 12.5px;
+        }
+      }
+    }
+  }
+}
