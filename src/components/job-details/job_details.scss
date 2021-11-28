@@ -2,7 +2,6 @@
 
 .job-details {
   position: relative;
-  margin-top: 20px;
   color: $color-grey-dark;
   max-height: 500px;
   overflow-y: scroll;
@@ -21,7 +20,7 @@
       width: 50px;
       height: 50px;
       position: absolute;
-      right: 30px;
+      right: 45px;
       top: 0;
     }
   }
@@ -49,5 +48,13 @@
         }
       }
     }
+  }
+  .close-icon {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    z-index: 100;
+    color: $color-green-dark;
+    cursor: pointer;
   }
 }

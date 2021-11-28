@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import countReducer from './reducers/test-reducer';
+import jobPortalReducer from './reducers/job_List_reducer';
 
 const rootReducer = combineReducers({
-  count: countReducer,
+  jobPortalData: jobPortalReducer,
 });
 
 export default rootReducer;

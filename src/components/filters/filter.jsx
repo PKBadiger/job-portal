@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import Card from '../shared-components/card';
 import './filter.scss';
 
@@ -12,7 +14,7 @@ const Filters = (props) => {
           <h5>{title}</h5>
           <ul className="filters">
             {list.map((data) => (
-              <li>
+              <li key={data}>
                 <span>
                   <input type="checkbox" name="location" />
                 </span>
@@ -26,4 +28,13 @@ const Filters = (props) => {
   );
 };
 
-export default Filters;
+Filters.defaultProps = {
+  list: [],
+};
+
+Filters.propTypes = {
+  title: PropTypes.string.isRequired,
+  list: PropTypes.arrayOf(PropTypes.string),
+};
+
+export default React.memo(Filters);

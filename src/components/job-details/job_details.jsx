@@ -1,75 +1,73 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
+import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import Card from '../shared-components/card';
 import './job_details.scss';
 
 const JobDetails = (props) => {
-  const a = 10;
+  const { handleOnClick } = props;
+  const selectedJobData = useSelector((state) => state.jobPortalData.selectedJobData);
 
+  const {
+    jobTitle,
+    company,
+    empType,
+    location,
+    headCount,
+    salary,
+    role,
+    rolesResp,
+    country,
+    src,
+    needToHave,
+  } = selectedJobData;
   return (
     <>
-      <Card cssClass="remove-padding-right">
+      <Card cssClass="remove-padding-right align">
         <div className="job-details">
+          <div className="close-icon" onClick={() => handleOnClick(false)}>
+            <i className="fa fa-times-circle" aria-hidden="true" />
+          </div>
           <div className="job-details-header">
-            <h4>Senior Software Engineer</h4>
-            <h5>IBM</h5>
-            <img
-              src="https://media-exp1.licdn.com/dms/image/C4D0BAQG_oY7LkqBPBA/company-logo_100_100/0/1622604168326?e=1646265600&v=beta&t=0KQuq7oiwCav52Kv2VNyCC3hdFqmAdFjKmvGTV0NzrY"
-              alt="image for company"
-            />
+            <h4>{jobTitle}</h4>
+            <h5>{company}</h5>
+            <img src={src} alt={company} />
           </div>
           <div className="job-details-container">
             <ul className="">
               <li>
-                <i className="fa fa-briefcase" /> 6-8 years exp
+                <i className="fa fa-briefcase" /> {empType}
               </li>
               <li>
-                <i className="fa fa-usd" /> Package
+                <i className="fa fa-usd" /> {salary}
               </li>
               <li>
                 <i className="fa fa-building" />
-                Location
+                {headCount}
               </li>
             </ul>
             <div className="job-details-descp">
               <h4>Job Details:</h4>
               <p>
                 <h5>Office Location:</h5>
-                <span>Victoria, BC or Remote from anywhere in the world!</span>
-              </p>
-              <p>
-                <h5>Relocation option:</h5>
                 <span>
-                  We are completely remote friendly - you can work from anywhere in THE WORLD that
-                  suits you best. We only ask that you try to work in the Pacific time zone (PST.)
+                  {location}, {country}
                 </span>
               </p>
+
               <p>
                 <h5>Role</h5>
-                <span>
-                  Want to become a world class Software Developer and work with one of Canada's
-                  fastest growing companies? Join our remarkable web development team and build new
-                  apps from the ground-up every 3-12 months.
-                </span>
+                <span>{role}</span>
               </p>
               <p>
                 <h5>Key Responsibility</h5>
-                <span>
-                  Analyze business problems of our clients and help formulate technology roadmap;
-                  Identify and propose technology solutions viable to the client needs; Collaborate
-                  with other web experts and address business, technical, and logical needs;
-                  Generate interface designs, prototypes, data flow diagrams, and system models;
-                  Participate in web app development, deployment, and migration;
-                </span>
+                <span>{rolesResp}</span>
               </p>
               <p>
                 <h5>Need to Haves</h5>
-                <span>
-                  A completed or in progress BS/MS in Computer Science or related discipline. 5+
-                  years as a Software Developer in a professional setting. Experience with JS
-                  frameworks, preferably React/Redux; Experience with implementing UI designs using
-                  JS, CSS and HTML; Experience with using deployment tools on AWS, Google Cloud or
-                  equivalent;
-                </span>
+                <span>{needToHave}</span>
               </p>
             </div>
           </div>
@@ -77,6 +75,10 @@ const JobDetails = (props) => {
       </Card>
     </>
   );
+};
+
+JobDetails.propTypes = {
+  handleOnClick: PropTypes.func.isRequired,
 };
 
 export default JobDetails;

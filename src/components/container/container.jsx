@@ -1,38 +1,60 @@
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import notFoundImage from '../../assets/images/not-found.png';
 import './container.scss';
 
 import JobListCard from '../job-list-card/job_card';
 import Filters from '../filters/filter';
 import JobDetails from '../job-details/job_details';
+import useToggle from '../custom_hooks/useToggle';
+
+import { getJobList } from '../../redux/actions/job_portal-actions';
+import Card from '../shared-components/card';
 
 const Container = () => {
-  const a = 10;
+  const dispatch = useDispatch();
+  const jobPortalData = useSelector((state) => state.jobPortalData);
+  const { isLoading, jobList } = jobPortalData;
+  const [open, handleOnClick] = useToggle(false);
+
+  useEffect(() => {
+    dispatch(getJobList());
+  }, []);
+
+  const locations = useMemo(() => ['Bangalore', 'Canada', 'UK'], []);
+  const industry = useMemo(() => ['Computer Software', 'Retail', 'Automotive'], []);
+  const size = useMemo(() => ['Small', 'Large', 'Medium'], []);
+
+  if (isLoading) {
+    return <div>Loading</div>;
+  }
+
+  console.log(!jobList.length);
 
   return (
     <>
       <div className="container">
         <div className="content-wrapper">
           <div className="layout-side-left">
-            <Filters list={['Bangalore', 'Canada', 'UK']} title="Filter by Location" />
-            <Filters
-              list={['Computer Software', 'Retail', 'Automotive']}
-              title="Filter by Industry"
-            />
-            <Filters list={['Small', 'Large', 'Medium']} title="Filter by company size" />
+            <Filters list={locations} title="Filter by Location" />
+            <Filters list={industry} title="Filter by Industry" />
+            <Filters list={size} title="Filter by company size" />
           </div>
           <div className="layout-main">
-            <JobListCard src="https://media-exp1.licdn.com/dms/image/C4D0BAQHiNSL4Or29cg/company-logo_100_100/0/1519856215226?e=1646265600&v=beta&t=DvOAwYFZRVl0xF2ooRLLdxa6znEyeOhNynimiU7oWxU" />
-            <JobListCard src="https://media-exp1.licdn.com/dms/image/C4E0BAQGgcRYcsEA95g/company-logo_100_100/0/1593617920398?e=1646265600&v=beta&t=igK8WcZHLH25TlT-h_2QkobktuLOVWTILupVWnKIDHM" />
-
-            <JobListCard src="https://media-exp1.licdn.com/dms/image/C4D0BAQG_oY7LkqBPBA/company-logo_100_100/0/1622604168326?e=1646265600&v=beta&t=0KQuq7oiwCav52Kv2VNyCC3hdFqmAdFjKmvGTV0NzrY" />
-            <JobListCard src="https://media-exp1.licdn.com/dms/image/C4D0BAQGLxWPpGqaVmw/company-logo_100_100/0/1607533344544?e=1646265600&v=beta&t=WhxciyIkq2UpMqecPplL2V_iFE4gse8Om7M0pDPTOZc" />
-            <JobListCard src="https://media-exp1.licdn.com/dms/image/C4D0BAQG3WCPdHyRd3A/company-logo_100_100/0/1625154311040?e=1646265600&v=beta&t=sv5yjNYQwl1270L9wqRlZOTO_mIwqeiKVR66GQCR330" />
-            <JobListCard src="https://media-exp1.licdn.com/dms/image/C560BAQE88xCsONDULQ/company-logo_100_100/0/1618231291419?e=1646265600&v=beta&t=mKnMgCf11ffkVjAybPXmUivPCACf0xG3c_VmzSDtbXg" />
-            <JobListCard />
-            <JobListCard />
+            {jobList.map((data) => (
+              <JobListCard key={data.id} jobDetailsData={data} handleOnClick={handleOnClick} />
+            ))}
+            {!jobList.length && (
+              <Card>
+                <div>
+                  <img src={notFoundImage} alt="job search not found image" />
+                  <h1>Could not find jobs matching your search criteria </h1>
+                </div>
+              </Card>
+            )}
           </div>
           <div className="layout-side-right">
-            <JobDetails />
+            {open && <JobDetails handleOnClick={handleOnClick} />}
           </div>
         </div>
       </div>

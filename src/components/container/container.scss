@@ -2,6 +2,12 @@
 @import 'Styles/base/mixins';
 
 .container {
+  @include mobile() {
+    margin: 75px 0 0 0;
+  }
+  @include tablet() {
+    margin: 85px 0 0 0;
+  }
   margin: 20px;
   .content-wrapper {
     display: flex;
@@ -12,28 +18,26 @@
     }
     .layout-side-left {
       width: 20%;
+      @include media(mobile, tablet) {
+        display: none;
+      }
     }
 
     .layout-main {
+      @include media(mobile, tablet) {
+        width: 100%;
+        margin: 0;
+      }
       width: 50%;
       margin-left: 20px;
     }
 
     .layout-side-right {
+      @include media(mobile, tablet) {
+        display: none;
+      }
       width: 30%;
       margin-left: 20px;
     }
   }
 }
-
-// .job-details::-webkit-scrollbar {
-//   width: 12px;
-//   background-color: #f5f5f5;
-// }
-
-// .job-details::-webkit-scrollbar-thumb {
-//   margin-left: 30px;
-//   border-radius: 10px;
-//   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-//   background-color: #555;
-// }

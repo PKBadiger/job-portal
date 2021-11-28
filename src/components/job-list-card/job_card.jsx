@@ -1,9 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import Card from '../shared-components/card';
 import './job_card.scss';
+import { getSelectedJobData } from '../../redux/actions/job_portal-actions';
 
 const JobListCard = (props) => {
-  const { src } = props;
+  const dispatch = useDispatch();
+  const { jobDetailsData, handleOnClick } = props;
+  const { src, jobTitle, company, location, country, postedOn, companyDescp } = jobDetailsData;
+
+  const handleOnClickView = (selectedJobData) => {
+    dispatch(getSelectedJobData(selectedJobData));
+    handleOnClick(true);
+  };
 
   return (
     <>
@@ -13,23 +23,22 @@ const JobListCard = (props) => {
             <img src={src} alt="ibm logo" />
           </div>
           <div className="job-pofile">
-            <h4>Software Developer - AIX</h4>
+            <h4>{jobTitle}</h4>
             <span>
-              <h5>VM Ware</h5>
-              <h6>Bengaluru, Karnataka, India(Remote)</h6>
+              <h5>{company}</h5>
+              <h6>
+                {location}, {country}
+              </h6>
             </span>
-            <p className="description">
-              analyze statistical data, such as mortality, accident, sickness, disability, and
-              retirement rates and construct probability tables to forecast risk and liability for
-              payment of future benefits. may ascertain insurance rates required and cash reserves
-              necessary to ensure payment of future benefits.
-            </p>
+            <p className="description">{companyDescp}</p>
             <div className="job-profile-footer">
-              <p>Posted: a day ago</p>
+              <p>{postedOn}</p>
             </div>
           </div>
           <div className="job-details">
-            <a href="#">View</a>
+            <a href="#" onClick={() => handleOnClickView(jobDetailsData)}>
+              View
+            </a>
           </div>
         </div>
       </Card>
@@ -37,4 +46,4 @@ const JobListCard = (props) => {
   );
 };
 
-export default JobListCard;
+export default React.memo(JobListCard);

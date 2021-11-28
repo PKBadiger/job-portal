@@ -1,8 +1,15 @@
 @import 'Styles/base/color';
+@import 'Styles/base/mixins';
 
 .job-container {
+  @include media(mobile, tablet) {
+    flex-direction: row-reverse;
+  }
   display: flex;
   .org-logo {
+    @include media(mobile, tablet) {
+      width: 65px;
+    }
     width: 10%;
     img {
       width: 56px;
@@ -10,6 +17,12 @@
     }
   }
   .job-pofile {
+    @include media(mobile, tablet) {
+      padding: 0;
+      margin: 0;
+      border: 0;
+      width: 100%;
+    }
     width: 80%;
     border-right: 1px solid $color-grey-light;
     margin-right: 10px;
@@ -32,6 +45,9 @@
     }
   }
   .job-details {
+    @include media(mobile, tablet) {
+      display: none;
+    }
     width: 10%;
     margin: auto;
     text-align: center;
