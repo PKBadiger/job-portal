@@ -168,7 +168,7 @@ export const designations = [
   'Associate Engineer',
   'Data Engineer',
   'Account Manager',
-  'Account Assistance Manager',
+  'Full Stack Developer',
   'Data Scientist',
   'Senior Data Scientist',
   'Automation Engineer',
