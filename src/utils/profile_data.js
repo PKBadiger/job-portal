@@ -177,7 +177,7 @@ export const designations = [
 
 export const skills = [
   'HTML',
-  'React JS',
+  'React',
   'Java',
   'Python',
   'Java Script',
